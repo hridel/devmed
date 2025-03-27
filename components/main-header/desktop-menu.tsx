@@ -11,7 +11,10 @@ const DesktopMenu = () => {
     <nav className="hidden md:inline-block">
       <ul className="flex flex-row items-center gap-4 lg:gap-8">
         {MainMenuItems.map((item) => {
-          const active = item.href === pathname;
+          const active =
+            item.href === pathname ||
+            (item.href === "/" && pathname.startsWith("/clanek/"));
+
           return (
             <li key={item.href}>
               <MenuLink href={item.href} label={item.label} active={active} />

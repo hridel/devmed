@@ -1,36 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Popis aplikace
 
-## Getting Started
+Tato aplikace je postavena na frameworku **Next.js 15**, který je známý svou jednoduchostí, flexibilitou a výkonností pro vývoj moderních webových aplikací a API. Next.js poskytuje výhody jako server-side rendering (SSR), statické generování stránek (SSG) a automatické rozdělování kódu, což vede k rychlejšímu načítání stránek a lepšímu uživatelskému zážitku.
 
-First, run the development server:
+## Package Manager
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Pro správu závislostí a balíčků používáme **pnpm** (Performant Node Package Manager). Pnpm je rychlejší a efektivnější než tradiční npm, protože využívá hard-linky a deduplikaci balíčků, což vede k menší spotřebě místa na disku a rychlejší instalaci balíčků.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## REST API
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Pro komunikaci mezi klientem a serverem jsme zvolili přístup přes **REST API** namísto **GraphQL** z několika důvodů:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Kompatibilita s Next.js App Directory**: REST API se snadno integruje s novou strukturou Next.js App Directory, což umožňuje efektivní využití Server Components.
+2. **Lepší podpora pro SEO**: REST API v kombinaci s Next.js umožňuje snadnější implementaci Server-Side Renderingu (SSR) a Static Site Generation (SSG), což výrazně zlepšuje SEO webu.
+3. **Optimalizace výkonu**: Next.js nabízí vestavěné optimalizace pro REST API, včetně automatického code splittingu a optimalizace obrázků, což vede k rychlejšímu načítání stránek.
+4. **Efektivní cachování**: REST API umožňuje efektivnější implementaci cachování na úrovni jednotlivých endpointů, což je klíčové pro optimalizaci výkonu rozsáhlých webových aplikací.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

@@ -84,6 +84,7 @@
   body {
     @apply bg-background text-foreground;
   }
+  article h1,
   article h2 {
     @apply font-article-header;
   }

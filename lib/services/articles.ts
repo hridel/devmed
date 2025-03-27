@@ -19,6 +19,10 @@ export interface ArticleListItemTranslations {
   } | null;
 }
 
+export interface ArticleDetailTranslations extends ArticleListItemTranslations {
+  content: string;
+}
+
 export interface ArticleListItem {
   id: string;
   date_updated: string;
@@ -30,6 +34,14 @@ export interface ArticlesListResponse {
     total_count: number;
   };
   data: ArticleListItem[];
+}
+
+export interface ArticleDetailResponse {
+  data: {
+    id: string;
+    date_updated: string;
+    translations: ArticleDetailTranslations[];
+  }[];
 }
 
 export async function getArticlesList(
@@ -79,8 +91,6 @@ export async function getArticlesList(
 
   const url = `${contentsEndpointUrl}?${requestSearchParams.toString()}`;
 
-  console.log(url);
-
   const response = await fetch(url, {
     headers: {
       "Content-Type": "application/json",
@@ -94,7 +104,9 @@ export async function getArticlesList(
   return await response.json();
 }
 
-export async function getArticleDetail(slug: string) {
+export async function getArticleDetail(
+  slug: string,
+): Promise<ArticleDetailResponse> {
   const requestSearchParams = new URLSearchParams();
 
   // Filtering - only published articles
@@ -112,7 +124,7 @@ export async function getArticleDetail(slug: string) {
   // Fields
   requestSearchParams.append(
     "fields",
-    "id,date_updated,translations.slug,translations.perex,translations.name,translations.language.code,translations.content",
+    "id,date_updated,translations.slug,translations.perex,translations.name,translations.image.width,translations.image.height,translations.image.filename_download,translations.language.code,translations.content",
   );
 
   // Limit to 1 result since we're looking for a specific article
