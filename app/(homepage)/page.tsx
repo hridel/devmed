@@ -6,6 +6,8 @@ interface HomePageProps {
   searchParams: Promise<{ page: string }>;
 }
 
+export const dynamic = 'force-dynamic';
+
 export default async function HomePage(props: HomePageProps) {
   const { page = "1" } = await props.searchParams;
   const pageNumber = parseInt(page, 10);
