@@ -5,7 +5,36 @@ import { notFound } from "next/navigation";
 
 const contentsEndpointUrl = `${process.env.API_ITEMS_BASE_URL}contents`;
 
-export async function getArticlesList(page: number) {
+export interface ArticleListItemTranslations {
+  slug: string;
+  perex: string;
+  name: string;
+  language: {
+    code: string;
+  };
+  image: {
+    filename_download: string;
+    width: number;
+    height: number;
+  } | null;
+}
+
+export interface ArticleListItem {
+  id: string;
+  date_updated: string;
+  translations: ArticleListItemTranslations[];
+}
+
+export interface ArticlesListResponse {
+  meta: {
+    total_count: number;
+  };
+  data: ArticleListItem[];
+}
+
+export async function getArticlesList(
+  page: number,
+): Promise<ArticlesListResponse> {
   const requestSearchParams = new URLSearchParams();
 
   // Get the current date in ISO format for filtering
@@ -34,7 +63,7 @@ export async function getArticlesList(page: number) {
   // Fields
   requestSearchParams.append(
     "fields",
-    "id,date_updated,translations.slug,translations.perex,translations.name,translations.language.code",
+    "id,date_updated,translations.slug,translations.perex,translations.name,translations.image.width,translations.image.height,translations.image.filename_download,translations.language.code",
   );
 
   // Sorting
@@ -49,6 +78,8 @@ export async function getArticlesList(page: number) {
   requestSearchParams.append("meta", "total_count");
 
   const url = `${contentsEndpointUrl}?${requestSearchParams.toString()}`;
+
+  console.log(url);
 
   const response = await fetch(url, {
     headers: {
