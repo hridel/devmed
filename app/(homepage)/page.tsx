@@ -6,7 +6,7 @@ interface HomePageProps {
   searchParams: Promise<{ page: string }>;
 }
 
-export const dynamic = 'force-dynamic';
+export const dynamic = 'auto';
 
 export default async function HomePage(props: HomePageProps) {
   const { page = "1" } = await props.searchParams;
